@@ -8,8 +8,8 @@ Feature: Automate login functionality
 
   Scenario: Login with invalid credentials
     Given User navigates to login page
-    When User enters invalid email address "nihalsinghparihar@gmail.com" into the email field
-    And User enters invalid password "parihar" into password field
+    When User enters invalid email address "nihalsinghparihar1@gmail.com" into the email field
+    And User enters invalid password "parihar1" into password field
     And User clicks on login button
     Then User should get proper warning message about invalid credintials
 

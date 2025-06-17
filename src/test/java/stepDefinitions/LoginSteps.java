@@ -1,7 +1,10 @@
 package stepDefinitions;
 
+import driver.DriverFactory;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,16 +12,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.time.Duration;
 
 public class LoginSteps {
-    WebDriver driver;
-    @Before
-    public void setup()
-    {
-         driver=new ChromeDriver();
-         driver.manage().window().maximize();
-         driver.manage().deleteAllCookies();
-         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-         driver.get("https://tutorialsninja.com/demo/");
-    }
+    WebDriver driver= DriverFactory.getDriver();
+
     @Given("User navigates to login page")
     public void user_navigates_to_login_page() {
       driver.findElement(By.xpath("//span[text()='My Account']")).click();
@@ -46,22 +41,24 @@ public class LoginSteps {
 
     @Then("User should successfully get login")
     public void user_should_successfully_get_login() {
-
+       String actualText=driver.findElement(By.linkText("Edit your account information")).getText();
+        Assert.assertEquals("Edit your account information",actualText);
     }
 
     @When("User enters invalid email address {string} into the email field")
-    public void user_enters_invalid_email_address_into_the_email_field(String string) {
-
+    public void user_enters_invalid_email_address_into_the_email_field(String invalidEmail) {
+        driver.findElement(By.name("email")).sendKeys(invalidEmail);
     }
 
     @When("User enters invalid password {string} into password field")
-    public void user_enters_invalid_password_into_password_field(String string) {
-
+    public void user_enters_invalid_password_into_password_field(String invalidPassword) {
+        driver.findElement(By.name("password")).sendKeys(invalidPassword);
     }
 
     @Then("User should get proper warning message about invalid credintials")
     public void user_should_get_proper_warning_message_about_invalid_credintials() {
-
+String actualText=driver.findElement(By.xpath("//div[contains(@class,'alert-dismissible')]")).getText();
+Assert.assertTrue(actualText,true);
     }
 
     @When("User does not enter email into the email field")
