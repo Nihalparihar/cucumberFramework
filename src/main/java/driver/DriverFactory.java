@@ -7,9 +7,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverFactory {
     static WebDriver driver;
-    public static void initializeDriver(String browserName)
+    static String browserName = System.getProperty("Browser", "Chrome");
+    public static void initializeDriver()
     {
-        if(browserName.equalsIgnoreCase("chrome"))
+
+        if(browserName.equalsIgnoreCase("Chrome"))
         {
             driver=new ChromeDriver();
         } else if (browserName.equalsIgnoreCase("firefox")) {

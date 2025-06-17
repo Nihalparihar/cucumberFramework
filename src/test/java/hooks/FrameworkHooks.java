@@ -13,7 +13,7 @@ public class FrameworkHooks {
     @Before
     public void setup()
     {
-        DriverFactory.initializeDriver("chrome");
+        DriverFactory.initializeDriver();
         driver=DriverFactory.getDriver();
 
         driver.manage().window().maximize();
