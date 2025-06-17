@@ -1,21 +1,47 @@
 package stepDefinitions;
-import hooks.FrameworkHooks.*;
+
 import driver.DriverFactory;
 import io.cucumber.java.en.*;
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.File;
+import java.time.Duration;
 
 public class LoginSteps {
     WebDriver driver;
 
     @Given("User navigates to login page")
     public void user_navigates_to_login_page() {
-        driver= DriverFactory.getDriver();
-      driver.findElement(By.xpath("//span[text()='My Account']")).click();
+        driver = DriverFactory.getDriver();
+
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement myAccount = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='My Account']")));
+
+            System.out.println("Displayed: " + myAccount.isDisplayed());
+            System.out.println("Enabled: " + myAccount.isEnabled());
+
+// Take screenshot before clicking
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(screenshot, new File("beforeClick.png"));
+
+// Click the element
+            myAccount.click();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to interact with 'My Account' element", e);
+
+            //driver.findElement(By.xpath("//span[text()='My Account']")).click();
+
+
+
+        }
         driver.findElement(By.xpath("//a[text()='Login']")).click();
-
-
     }
 
     @When("User enters valid email address {string} into the email field")
