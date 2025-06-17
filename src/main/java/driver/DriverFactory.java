@@ -10,7 +10,7 @@ public class DriverFactory {
     static String browserName = System.getProperty("Browser", "Chrome");
     public static void initializeDriver()
     {
-
+        System.out.println("browserName   = "+browserName);
         if(browserName.equalsIgnoreCase("Chrome"))
         {
             driver=new ChromeDriver();

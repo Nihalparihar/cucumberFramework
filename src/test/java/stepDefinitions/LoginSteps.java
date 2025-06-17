@@ -1,21 +1,17 @@
 package stepDefinitions;
-
+import hooks.FrameworkHooks.*;
 import driver.DriverFactory;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.time.Duration;
 
 public class LoginSteps {
-    WebDriver driver= DriverFactory.getDriver();
+    WebDriver driver;
 
     @Given("User navigates to login page")
     public void user_navigates_to_login_page() {
+        driver= DriverFactory.getDriver();
       driver.findElement(By.xpath("//span[text()='My Account']")).click();
         driver.findElement(By.xpath("//a[text()='Login']")).click();
 
