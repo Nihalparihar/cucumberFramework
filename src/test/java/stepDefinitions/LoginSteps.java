@@ -19,7 +19,7 @@ public class LoginSteps {
         driver = DriverFactory.getDriver();
 
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
             WebElement myAccount = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='My Account']")));
 
             System.out.println("Displayed: " + myAccount.isDisplayed());

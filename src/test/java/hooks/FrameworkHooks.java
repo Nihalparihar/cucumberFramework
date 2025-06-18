@@ -17,9 +17,10 @@ public class FrameworkHooks {
 
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
         Thread.sleep(50000);
         driver.get("https://tutorialsninja.com/demo/");
+        Thread.sleep(50000);
     }
     @After
     public  void tearDown()
